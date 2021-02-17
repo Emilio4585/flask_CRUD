@@ -9,12 +9,12 @@ def home():
     return render_template("index.html", users = all_data)
 
 @app.route("/read/<int:pk>")
-def read(pk):
-    user = User.query.filter_by(id=pk).first()
-    return redirect(url_for('home'))
+def read_user(pk):
+    user = User.query.filter_by(_id=pk).first()
+    return render_template("user.html", user = user)#Aqui va a listar al usuario solamente
 
 @app.route('/new', methods=["POST", "GET"])
-def create_user():
+def new_user():
     if request.method == "POST":
         try:
             name = request.form.get("name")
@@ -32,7 +32,7 @@ def create_user():
 def update_user(pk):
     if request.method == "POST":
         try:
-            user = User.query.get(id=pk)
+            user = User.query.filter_by(_id=pk).first()
             user.name = request.form.get("name")
             user.email = request.form.get("email")
             user.address = request.form.get("address")
@@ -44,8 +44,8 @@ def update_user(pk):
     return redirect(url_for("home"))
 
 @app.route("/delete/<int:pk>")
-def delete(pk):
-    user = User.query.filter_by(id=pk).first()
+def delete_user(pk):
+    user = User.query.filter_by(_id=pk).first()
     db.session.delete(user)
     db.session.commit()
     return redirect(url_for('home'))

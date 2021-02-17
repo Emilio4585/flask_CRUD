@@ -1,8 +1,85 @@
 {% extends "base.html" %}
 
-{% block body %}
+{% block data %}
 
-    <h1>Hola mundo</h1>
+{% for row in employe %}
+<tr>
+    <td>
+        <span class="custom-checkbox">
+            <input type="checkbox" id="checkbox1" name="option{{row._id}}" value="1">
+            <label for="checkbox1"></label>
+        </span>
+    </td>
+    <td>{{row._id}}</td>
+    <td>{{row.name}}</td>
+    <td>{{row.email}}</td>
+    <td>{{row.address}}</td>
+    <td>{{row.phone}}</td>
+    <td>
+        <a href="#editEmployeeModal{{row._id}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+        <a href="#deleteEmployeeModal{{row._id}}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+    </td>
+</tr>
+<!-- Edit Modal HTML -->
+<div id="editEmployeeModal{{row._id}}" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form action="/edit" method="POST">
+				<div class="modal-header">						
+					<h4 class="modal-title">Edit Employee</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">					
+					<div class="form-group">
+                        <label>Name</label>
+                        <input type = "hidden" name = "id" value ="{{row._id}}">
+						<input type="text" name="editname" class="form-control" value= {{row.name}} required/>
+					</div>
+					<div class="form-group">
+						<label>Email</label>
+						<input type="email" name="editemail" class="form-control" value = {{row.email}} required/>
+					</div>
+					<div class="form-group">
+						<label>Address</label>
+						<input type="text" name="editaddress" class="form-control" value = {{row.address}} required/>
+					</div>
+					<div class="form-group">
+						<label>Phone</label>
+						<input type="text" name="editphone" class="form-control" value= {{row.phone}} required/>
+                    </div>					
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+					<input type="submit" class="btn btn-info" value="Save">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- Delete Modal HTML -->
+<div id="deleteEmployeeModal{{row._id}}" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form action = "/delete" method = "POST">
+				<div class="modal-header">						
+					<h4 class="modal-title">Delete Employee</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">					
+					<p>Are you sure you want to delete these Records?</p>
+					<p class="text-warning"><small>This action cannot be undone.</small></p>
+				</div>
+				<div class="modal-footer">
+                    <input type = "hidden" name = "id" value ="{{row._id}}">
+					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+					<input type="submit" class="btn btn-danger" value="Delete">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 
+
+{% endfor %}
 
 {% endblock %}

@@ -19,6 +19,7 @@ def create_user():
             user = User(name=name, email=email, address=address,phone=phone)
             user.add()
         except Exception as e:
+            flash("There was a failure adding the user try again")
             print("Fallo al añadir usuario")
             print(e)
     return redirect(url_for('home'))
@@ -34,6 +35,7 @@ def update_user():
             id.phone = request.form.get("editphone")
             id.update()
         except Exception as e:
+            flash("There was a failure to update the user try again")
             print("Fallo al actualizar el user")
             print(e)
     return redirect(url_for("home"))

@@ -5,10 +5,14 @@ from modulo import app,db
 
 
 
-@app.route("/")
+@app.route("/", methods=["POST", "GET"])
 def home():
 
-    return render_template("index.html")
+    all_data = users.query.all()
+
+    
+
+    return render_template("index.html", users = all_data)
 
 
 

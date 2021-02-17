@@ -8,7 +8,6 @@ def home():
     all_data = User.query.all()
     return render_template("index.html", users = all_data)
 
-
 @app.route('/new', methods=["POST", "GET"])
 def create_user():
     if request.method == "POST":
@@ -24,27 +23,19 @@ def create_user():
             print(e)
     return redirect(url_for('home'))
 
-
-
 @app.route("/update", methods=['POST','GET'])
 def update_user():
-
     if request.method == "POST":
-
         try:
-
-            iD = User.query.get(request.form.get("id"))
-            iD.name = request.form.get("editname")
-            iD.email= request.form.get("editemail")
-            iD.address = request.form.get("editaddress")
-            iD.phone = request.form.get("editphone")
-
-            iD.update()
-        
+            id = User.query.get(request.form.get("id"))
+            id.name = request.form.get("editname")
+            id.email= request.form.get("editemail")
+            id.address = request.form.get("editaddress")
+            id.phone = request.form.get("editphone")
+            id.update()
         except Exception as e:
             print("Fallo al actualizar el user")
             print(e)
-    
     return redirect(url_for("home"))
 
 

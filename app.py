@@ -9,7 +9,7 @@ from modulo import app,db
 def home():
     return render_template("index.html")
 
-@app.route('new')
+@app.route('/new')
 def create_user():
     users = None
     if request.form:
@@ -26,7 +26,7 @@ def create_user():
             print("Fallo al añadir usuario")
             print(e)
     users = User.query.all()
-    return render_template("home.html", users=users)
+    return render_template("index.html", users=users)
 
 if __name__ == "__main__":
     db.create_all()

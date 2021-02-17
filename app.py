@@ -12,6 +12,11 @@ def home():
 def read_user(pk):
     user = User.query.filter_by(_id=pk).first()
     return render_template("user.html", user = user)#Aqui va a listar al usuario solamente
+    '''
+    Haria falta uno de lectura? 
+    ya al cargar la pagina te muestra los usuarios... en home()
+
+    '''
 
 @app.route('/new', methods=["POST", "GET"])
 def new_user():
@@ -24,8 +29,9 @@ def new_user():
             user = User(name=name, email=email, address=address,phone=phone)
             user.add()
         except Exception as e:
-            flash("there was a failure adding the user, try again")
-            flash(e)
+            flash("There was a failure adding the user try again")
+            print("Fallo al añadir usuario")
+            print(e)
     return redirect(url_for('home'))
 
 @app.route("/update/<int:pk>", methods=['POST','GET'])
@@ -38,9 +44,11 @@ def update_user(pk):
             user.address = request.form.get("address")
             user.phone = request.form.get("phone")
             user.update()
+            
         except Exception as e:
-            flash("update adding the user, try again")
-            flash("there was a failure adding the user, try again")
+            flash("There was a failure to update the user try again")
+            print("Fallo al actualizar el user")
+            print(e)
     return redirect(url_for("home"))
 
 @app.route("/delete/<int:pk>")

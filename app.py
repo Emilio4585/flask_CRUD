@@ -8,16 +8,6 @@ def home():
     all_data = User.query.all()
     return render_template("index.html", users = all_data)
 
-@app.route("/read/<int:pk>")
-def read_user(pk):
-    user = User.query.filter_by(_id=pk).first()
-    return render_template("user.html", user = user)#Aqui va a listar al usuario solamente
-    '''
-    Haria falta uno de lectura? 
-    ya al cargar la pagina te muestra los usuarios... en home()
-
-    '''
-
 @app.route('/new', methods=["POST", "GET"])
 def new_user():
     if request.method == "POST":

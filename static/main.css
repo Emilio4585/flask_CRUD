@@ -84,11 +84,16 @@ table.table td a {
 	text-decoration: none;
 	outline: none !important;
 }
+
 table.table td a:hover {
 	color: #2196F3;
 }
 table.table td a.edit {
 	color: #FFC107;
+}
+table.table td a.update {
+	color: rgb(146, 60, 146);
+	padding-left: 1em;
 }
 table.table td a.delete {
 	color: #F44336;
@@ -222,3 +227,4 @@ table.table .avatar {
 .modal form label {
 	font-weight: normal;
 }	
+

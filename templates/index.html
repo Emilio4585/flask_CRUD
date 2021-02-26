@@ -5,7 +5,10 @@
 {% for row in User.items %} 
 <tr>
     <td>
-
+        <span class="custom-checkbox">
+            <input type="checkbox" id="checkbox1" name="option{{row._id}}" value="1">
+            <label for="checkbox1"></label>
+        </span>
     </td>
     <td>{{row._id}}</td>
     <td>{{row.name}}</td>

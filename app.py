@@ -4,16 +4,15 @@ from models import User
 from modulo import app,db
 
 @app.route("/", methods=["POST", "GET"])
-
 def home():
     users_per_page = 5
     all_data = User.query.all()
     total_user = len(User.query.all())
-    page = request.args.get('page',1, type =int)
+    page = request.args.get('page', 1, type=int)
     
     users = User.query.paginate(page=page, per_page = users_per_page)
 
-    return render_template("index.html",User = users)
+    return render_template("index.html", User = users)
 
 @app.route('/new', methods=["POST", "GET"])
 def new_user():

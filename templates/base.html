@@ -90,13 +90,13 @@ $(document).ready(function(){
 			<div class="clearfix">
 				<div class="hint-text">Showing page <b>{{ User.page }}</b>  of <b>{{ User.pages }}</b> </div>
 				<ul class="pagination">
-					<li class="page-item disabled"><a href="{{ url_for('new_user', page=User.prev_num) }}" class = "btn btn-outline-dark {% if User.page == 1 %}disabled{% endif %}">Previous</a></li>
-					{% for page_num in User.iter_pages() %}
+					<li class="page-item disabled"><a href="{{ url_for('home', page=User.prev_num) }}" class = "btn btn-outline-dark {% if User.page == 1 %}disabled{% endif %}">Previous</a></li>
+					{% for page_num in User.iter_pages(left_edge=1, right_edge=1,left_current=1,right_current=2) %}
 						{% if page_num %}
 							{% if User.page == page_num %}
-								<li class="page-item active"><a href="{{ url_for('new_user', page=page_num) }}" class="page-link">{{ page_num }}</a></li>
+								<li class="page-item active"><a href="{{ url_for('home', page=page_num) }}" class="page-link">{{ page_num }}</a></li>
 							{% else %}
-								<li class="page-item"><a href="{{ url_for('new_user', page=page_num) }}" class="page-link">{{ page_num }}</a></li>
+								<li class="page-item"><a href="{{ url_for('home', page=page_num) }}" class="page-link">{{ page_num }}</a></li>
 							{% endif %}
 						{% else %}
 							... 
@@ -106,7 +106,7 @@ $(document).ready(function(){
 					<!--<li class="page-item"><a href="#" class="page-link">3</a></li>
 					<li class="page-item"><a href="#" class="page-link">4</a></li>
 					<li class="page-item"><a href="#" class="page-link">5</a></li> -->
-					<li class="page-item"><a href="{{ url_for('new_user', page=User.next_num) }}" class="page-link {% if User.page == User.pages %}disabled{% endif %}">Next</a></li>
+					<li class="page-item"><a href="{{ url_for('home', page=User.next_num) }}" class="page-link {% if User.page == User.pages %}disabled{% endif %}">Next</a></li>
 				</ul>
 			</div>
 		</div>

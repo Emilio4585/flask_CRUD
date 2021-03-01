@@ -50,8 +50,7 @@ def update_user(pk):
 @app.route("/delete/<int:pk>")
 def delete_user(pk):
     user = User.query.filter_by(_id=pk).first()
-    db.session.delete(user)
-    db.session.commit()
+    user.delete()
     return redirect(url_for('home'))
 
 #delete y el read
